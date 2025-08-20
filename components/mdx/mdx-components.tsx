@@ -59,7 +59,7 @@ export const mdxComponents = {
     ...props
   }: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
-      className="border-l-4 border-gray-300 pl-4 my-4 italic text-gray-700"
+      className="border-l-4 border-gray-300 dark:border-gray-600 pl-4 my-4 italic text-gray-700"
       {...props}
     >
       {children}
@@ -67,7 +67,7 @@ export const mdxComponents = {
   ),
   code: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
-      className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono"
+      className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm font-mono"
       {...props}
     >
       {children}
@@ -89,7 +89,7 @@ export const mdxComponents = {
     // Otherwise, use default pre styling
     return (
       <pre
-        className="bg-gray-100 p-4 rounded-lg overflow-x-auto my-4"
+        className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-4"
         {...props}
       >
         {children}
