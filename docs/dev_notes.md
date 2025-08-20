@@ -86,8 +86,8 @@ const eslintConfig = [
 ## Allowing support .mdx whilst keeping .md support
 - 1. install these packages: 
   - `next-mdx-remote` - allows use to conver mdx from anywhere into html 
-  - `@mdx/mdx` - handles the conversion of mdx into html
-  - `@mdx/react` - allows us to add custom html components within `mdx-components.tsx`
+  - `@mdx-js/mdx` - handles the conversion of mdx into html
+  - `@mdx-js/react` - allows us to add custom html components within `mdx-components.tsx`
   - using command: `npm install next-mdx-remote @mdx/mdx @mdx/react`
 
 - 2. create `/components/mdx/mdx-components.tsx` and define styling for the html components that will be converted to from mdx, e.g.:

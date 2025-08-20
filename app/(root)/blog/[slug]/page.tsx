@@ -5,6 +5,8 @@ import { mdxComponents } from "@/components/mdx/mdx-components";
 import matter from "gray-matter";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import remarkGfm from "remark-gfm";
+import rehypeTasklistToSpans from "@/lib/rehype-tasklist-to-spans";
 
 // Generate the static params so that these pages will be static
 // This tells Next.js which dynamic routes (in this case, blog post paths) should be pre-rendered at build time.
@@ -52,7 +54,16 @@ export default async function PostPage({ params }: any) {
           className="w-full my-4 rounded-xl md:h-64 md:object-cover"
         />
         <div className="post-body">
-          <MDXRemote source={content} components={mdxComponents} />
+          <MDXRemote
+            source={content}
+            components={mdxComponents}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+                rehypePlugins: [rehypeTasklistToSpans],
+              },
+            }}
+          />
           {/* <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div> */}
         </div>
       </div>
