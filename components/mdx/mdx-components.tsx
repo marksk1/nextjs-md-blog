@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import CodeBlock from "./CodeBlock";
 
 export const mdxComponents = {
   // Override default HTML elements with custom styling
@@ -72,11 +73,29 @@ export const mdxComponents = {
       {children}
     </code>
   ),
-  pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-    <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto my-4" {...props}>
-      {children}
-    </pre>
-  ),
+  pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => {
+    // Check if the child is a code element with a className (language)
+    const childProps = React.isValidElement(children)
+      ? (children.props as any)
+      : {};
+    const className = childProps.className || "";
+    const code = childProps.children || "";
+
+    // If it's a code block with language, use our CodeBlock component
+    if (className && typeof code === "string") {
+      return <CodeBlock className={className}>{code}</CodeBlock>;
+    }
+
+    // Otherwise, use default pre styling
+    return (
+      <pre
+        className="bg-gray-100 p-4 rounded-lg overflow-x-auto my-4"
+        {...props}
+      >
+        {children}
+      </pre>
+    );
+  },
   Fire: ({ children }: { children: React.ReactNode }) => (
     <span className="font-bold text-xl bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent animate-pulse">
       {children}
