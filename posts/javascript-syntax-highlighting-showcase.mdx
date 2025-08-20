@@ -1,0 +1,366 @@
+---
+title: "JavaScript Syntax Highlighting Showcase"
+date: "January 15, 2025"
+excerpt: "A comprehensive showcase of JavaScript syntax highlighting featuring modern ES6+ features, async/await, classes, and more"
+cover_image: "/images/posts/img1.jpg"
+---
+
+This post demonstrates the beautiful syntax highlighting capabilities of our MDX blog with various JavaScript code examples. From basic functions to advanced async patterns, see how code comes to life with proper highlighting!
+
+## Basic JavaScript Functions
+
+Let's start with some fundamental JavaScript concepts:
+
+```javascript
+// Function declarations and arrow functions
+function greetUser(name) {
+    return `Hello, ${name}! Welcome to our blog.`;
+}
+
+const greetUserArrow = (name) => {
+    return `Hello, ${name}! Welcome to our blog.`;
+};
+
+// Shorthand arrow function
+const multiply = (a, b) => a * b;
+
+console.log(greetUser("Alice"));
+console.log(multiply(5, 3));
+```
+
+## Modern ES6+ Features
+
+JavaScript has evolved significantly with ES6 and beyond. Here are some modern features:
+
+```javascript
+// Destructuring assignment
+const user = {
+    name: "John Doe",
+    email: "john@example.com",
+    age: 30,
+    preferences: {
+        theme: "dark",
+        language: "en"
+    }
+};
+
+const { name, email, preferences: { theme } } = user;
+const [first, second, ...rest] = [1, 2, 3, 4, 5];
+
+// Template literals with expressions
+const userInfo = `
+    User: ${name}
+    Email: ${email}
+    Preferred theme: ${theme}
+    Total items: ${rest.length + 2}
+`;
+
+// Spread operator and default parameters
+function createUser(name, email, options = {}) {
+    return {
+        id: Math.random().toString(36).substr(2, 9),
+        name,
+        email,
+        ...options,
+        createdAt: new Date().toISOString()
+    };
+}
+```
+
+## Async/Await and Promises
+
+Modern JavaScript heavily relies on asynchronous programming:
+
+```javascript
+// Async function with error handling
+async function fetchUserData(userId) {
+    try {
+        const response = await fetch(`/api/users/${userId}`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const userData = await response.json();
+        return userData;
+    } catch (error) {
+        console.error("Failed to fetch user data:", error);
+        throw error;
+    }
+}
+
+// Promise chaining and Promise.all
+const fetchMultipleUsers = async (userIds) => {
+    const userPromises = userIds.map(id => fetchUserData(id));
+    
+    try {
+        const users = await Promise.all(userPromises);
+        return users.filter(user => user !== null);
+    } catch (error) {
+        console.error("Error fetching multiple users:", error);
+        return [];
+    }
+};
+
+// Using the functions
+(async () => {
+    const user = await fetchUserData(123);
+    const users = await fetchMultipleUsers([1, 2, 3, 4, 5]);
+    console.log({ user, users });
+})();
+```
+
+## Classes and Object-Oriented Programming
+
+JavaScript classes provide a clean syntax for object-oriented programming:
+
+```javascript
+// Base class with constructor and methods
+class Animal {
+    constructor(name, species) {
+        this.name = name;
+        this.species = species;
+        this._energy = 100;
+    }
+    
+    // Getter and setter
+    get energy() {
+        return this._energy;
+    }
+    
+    set energy(value) {
+        this._energy = Math.max(0, Math.min(100, value));
+    }
+    
+    // Instance methods
+    speak() {
+        console.log(`${this.name} makes a sound`);
+        this.energy -= 5;
+    }
+    
+    sleep() {
+        console.log(`${this.name} is sleeping...`);
+        this.energy = Math.min(100, this.energy + 20);
+    }
+    
+    // Static method
+    static compareAnimals(animal1, animal2) {
+        return animal1.energy - animal2.energy;
+    }
+}
+
+// Inheritance with super
+class Dog extends Animal {
+    constructor(name, breed) {
+        super(name, "Canis lupus");
+        this.breed = breed;
+        this.tricks = [];
+    }
+    
+    speak() {
+        console.log(`${this.name} barks: Woof! Woof!`);
+        this.energy -= 3;
+    }
+    
+    learnTrick(trick) {
+        this.tricks.push(trick);
+        console.log(`${this.name} learned a new trick: ${trick}`);
+    }
+    
+    performTrick() {
+        if (this.tricks.length === 0) {
+            console.log(`${this.name} doesn't know any tricks yet.`);
+            return;
+        }
+        
+        const randomTrick = this.tricks[Math.floor(Math.random() * this.tricks.length)];
+        console.log(`${this.name} performs: ${randomTrick}`);
+        this.energy -= 10;
+    }
+}
+```
+
+## Advanced JavaScript Patterns
+
+Here are some advanced patterns and features:
+
+```javascript
+// Closures and higher-order functions
+function createCounter(initialValue = 0) {
+    let count = initialValue;
+    
+    return {
+        increment: (step = 1) => count += step,
+        decrement: (step = 1) => count -= step,
+        getValue: () => count,
+        reset: () => count = initialValue
+    };
+}
+
+// Debounce function (common utility)
+function debounce(func, delay) {
+    let timeoutId;
+    
+    return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+// Module pattern with IIFE
+const UserManager = (function() {
+    const users = new Map();
+    let nextId = 1;
+    
+    return {
+        addUser(userData) {
+            const id = nextId++;
+            const user = { id, ...userData, createdAt: Date.now() };
+            users.set(id, user);
+            return user;
+        },
+        
+        getUser(id) {
+            return users.get(id);
+        },
+        
+        updateUser(id, updates) {
+            const user = users.get(id);
+            if (user) {
+                Object.assign(user, updates, { updatedAt: Date.now() });
+                return user;
+            }
+            return null;
+        },
+        
+        deleteUser(id) {
+            return users.delete(id);
+        },
+        
+        getAllUsers() {
+            return Array.from(users.values());
+        }
+    };
+})();
+
+// Proxy for object validation
+function createValidatedUser(userData) {
+    return new Proxy(userData, {
+        set(target, property, value) {
+            if (property === "email" && !value.includes("@")) {
+                throw new Error("Invalid email format");
+            }
+            
+            if (property === "age" && (typeof value !== "number" || value < 0)) {
+                throw new Error("Age must be a positive number");
+            }
+            
+            target[property] = value;
+            return true;
+        }
+    });
+}
+```
+
+## React Hooks (Bonus)
+
+Since this is a React-based blog, here's some React code too:
+
+```javascript
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+
+// Custom hook
+function useLocalStorage(key, initialValue) {
+    const [storedValue, setStoredValue] = useState(() => {
+        try {
+            const item = window.localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+        } catch (error) {
+            console.error(`Error reading localStorage key "${key}":`, error);
+            return initialValue;
+        }
+    });
+    
+    const setValue = useCallback((value) => {
+        try {
+            setStoredValue(value);
+            window.localStorage.setItem(key, JSON.stringify(value));
+        } catch (error) {
+            console.error(`Error setting localStorage key "${key}":`, error);
+        }
+    }, [key]);
+    
+    return [storedValue, setValue];
+}
+
+// React component using hooks
+function UserProfile({ userId }) {
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [preferences, setPreferences] = useLocalStorage("userPrefs", {});
+    
+    // Memoized computation
+    const displayName = useMemo(() => {
+        if (!user) return "Loading...";
+        return `${user.firstName} ${user.lastName}`;
+    }, [user]);
+    
+    // Effect for data fetching
+    useEffect(() => {
+        let isCancelled = false;
+        
+        async function fetchUser() {
+            try {
+                setLoading(true);
+                const response = await fetch(`/api/users/${userId}`);
+                const userData = await response.json();
+                
+                if (!isCancelled) {
+                    setUser(userData);
+                }
+            } catch (error) {
+                if (!isCancelled) {
+                    console.error("Failed to fetch user:", error);
+                }
+            } finally {
+                if (!isCancelled) {
+                    setLoading(false);
+                }
+            }
+        }
+        
+        fetchUser();
+        
+        return () => {
+            isCancelled = true;
+        };
+    }, [userId]);
+    
+    if (loading) {
+        return <div className="loading">Loading user profile...</div>;
+    }
+    
+    return (
+        <div className="user-profile">
+            <h1>Welcome, {displayName}!</h1>
+            <p>Email: {user?.email}</p>
+            <p>Member since: {new Date(user?.createdAt).toLocaleDateString()}</p>
+        </div>
+    );
+}
+
+export default UserProfile;
+```
+
+## Conclusion
+
+This showcase demonstrates how syntax highlighting brings code to life, making it easier to read and understand. The combination of proper colors, formatting, and structure helps developers quickly identify:
+
+- **Keywords** (function, class, const, let, var)
+- **Strings** and template literals
+- **Numbers** and boolean values
+- **Comments** and documentation
+- **Operators** and punctuation
+- **Function names** and variable declarations
+
+Whether you're writing vanilla JavaScript, modern ES6+, or React components, proper syntax highlighting is essential for a great developer experience!

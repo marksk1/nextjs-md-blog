@@ -24,7 +24,6 @@ async function getPosts() {
     // renames data as frontmatter
     const { data: frontmatter } = matter(markdownWithMeta);
 
-    console.log(frontmatter);
     return {
       slug,
       frontmatter,
@@ -37,7 +36,6 @@ async function getPosts() {
 
 export default async function Home() {
   const { posts } = await getPosts();
-  console.log(posts);
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

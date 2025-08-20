@@ -9,15 +9,26 @@ Lorem markdownum erat meritum instat quis! Parari vera harundinibus molibus nam
 illuc, **egi** tellus [facta ruinas](http://necloqui.com/fuit.html), iterumque!
 Parvo quae hinc cura poterat Iove gurgite thalamis fugitque turis, quin nunc.
 
-```
-    var pdf_linux_radcab = gibibyteAspUri + firewireIvr -
-            jre_software_character;
-    var megabit_layout = 38 + executableExpansionHdd(storage_import_runtime,
-            tweenJpeg) - contextual;
-    url_bing.upnp_modifier_cold(linkedin, inputTrackballRefresh.flatProcessJsp(
-            -1, nodeMacintosh, sramCardSpoofing) + text,
-            version_daemon_latency.localhost_compact_boot.dosSpool(
-            memory_controller_blu(jpegServer, maximizeAsciiType), status));
+```php
+<?php
+// Union types - new in PHP 8
+function processValue(int|string $value): int|string {
+    if (is_string($value)) {
+        return strtoupper($value);
+    }
+    return $value * 2;
+}
+
+// Named arguments - new in PHP 8
+function createUser(string $name, string $email, bool $active = true): User {
+    return new User($name, $email, $active);
+}
+
+$user = createUser(
+    name: 'John Doe',
+    email: 'john@example.com',
+    active: false
+);
 ```
 
 Iungunt cuspis rarissima tendentem domus natis tamen ultima domino invidiosa
@@ -32,15 +43,27 @@ temeraria, per? Meum eque deae tu vidisse Frigus triennia, equo
 [trahit](http://in.net/ignarusfuit.html), enim verti commota prima cornibus
 pectora!
 
-```
-    tiffWord(snippetAnimatedCd);
-    wrap_exbibyte = cropStation;
-    if (page(mailDvCybersquatter, error, ip)) {
-        xsltMacintosh += ip;
-    } else {
-        social += traceroute_redundancy_voip;
-        box_isp.lion = wepSuffix;
-    }
+```php
+<?php
+// Match expressions - new in PHP 8
+$result = match($statusCode) {
+    200, 201 => 'Success',
+    400, 404 => 'Client Error',
+    500, 502 => 'Server Error',
+    default => 'Unknown Status'
+};
+
+// Nullsafe operator - new in PHP 8
+$username = $user?->profile?->name ?? 'Guest';
+
+// Constructor property promotion - new in PHP 8
+class User {
+    public function __construct(
+        public string $name,
+        public string $email,
+        public bool $active = true
+    ) {}
+}
 ```
 
 Tam Pomona _fixis cera vidisse_ Sperchios ista _concordes_ parte comes animalia
@@ -57,17 +80,27 @@ videres. Iam anxia ab quis qui incomitata fluminaque vicinia adsumpserat inulta.
 Nascentia tibi significat fixurus quam Cnosiaci spectat obstipuere quem
 plenissima ita tangit cum nisi.
 
-```
-    class.runtimeFatSku += 2 * 8;
-    if (command) {
-        mini = video;
-        handle_repository_mtu = osd_boot_mips(lamp + 2,
-                managementMultiplatformBoot(rubyLockWpa, 1), laptopHdtv);
-        horse += 2 + address(ictPinterestPpga, -5);
+```php
+<?php
+// Attributes (annotations) - new in PHP 8
+#[Route('/api/users', methods: ['GET', 'POST'])]
+#[Cache(ttl: 3600)]
+class UserController {
+    #[Validate(['name' => 'required|string|max:255'])]
+    public function store(Request $request): JsonResponse {
+        $user = new User(
+            name: $request->input('name'),
+            email: $request->input('email')
+        );
+
+        return response()->json($user, 201);
     }
-    wiki_responsive_flash.ddr_disk -= c_cd +
-            andCopy.intellectual_so_iteration.cross(moduleReadme, programming +
-            broadband);
+}
+
+// WeakMap - new in PHP 8
+$weakMap = new WeakMap();
+$object = new stdClass();
+$weakMap[$object] = 'some data';
 ```
 
 Mirantia deique sacerdos, opus, at [generis eandem

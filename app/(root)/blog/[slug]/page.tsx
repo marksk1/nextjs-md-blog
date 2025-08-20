@@ -45,8 +45,12 @@ export default async function PostPage({ params }: any) {
       </Button>
       <div className="rounded-2xl shadow-md p-6 mt-4">
         <h1 className="text-3xl font-bold">{title}</h1>
-        <div className="mt-4 text-lg bg-gray-100">Posted on {date}</div>
-        <img src={cover_image} alt="" className="mt-4 rounded-2xl" />
+        <div className="mt-4 text-md">Posted on {date}</div>
+        <img
+          src={cover_image}
+          alt=""
+          className="w-full my-4 rounded-xl md:h-64 md:object-cover"
+        />
         <div className="post-body">
           <MDXRemote source={content} components={mdxComponents} />
           {/* <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div> */}
