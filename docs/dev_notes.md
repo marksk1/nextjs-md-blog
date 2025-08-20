@@ -82,3 +82,27 @@ const eslintConfig = [
   - first install it: `npm install -g serve` (globally)
   - then we can use it to serve on a particular port: `serve -s ./out -p 8000`
   - congrats, your site is served!
+
+## Allowing support .mdx whilst keeping .md support
+- 1. install these packages: 
+  - `next-mdx-remote` - allows use to conver mdx from anywhere into html 
+  - `@mdx/mdx` - handles the conversion of mdx into html
+  - `@mdx/react` - allows us to add custom html components within `mdx-components.tsx`
+  - using command: `npm install next-mdx-remote @mdx/mdx @mdx/react`
+
+- 2. create `/components/mdx/mdx-components.tsx` and define styling for the html components that will be converted to from mdx, e.g.:
+  ```
+  export const mdxComponents = {
+    // Override default HTML elements with custom styling
+    h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <h1 className="text-3xl font-bold mt-8 mb-4" {...props}>
+        {children}
+      </h1>
+    ),
+    ...and other components like h2, h3, p, a, img, etc.
+  }
+  ```
+
+- update your blog singular post page `app/(root)/blog/[slug]/page.tsx` to use the `mdx` packages instead of `marked`
+  - also include `.mdx` files in the `generateStaticParams()` function so they are included during build
+- update your archive posts list page `app/(root)/blog/[slug]/page.tsx` to include both `.mdx` and `.md` files
