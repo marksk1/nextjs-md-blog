@@ -42,3 +42,11 @@
   - at build time the data will be fetched from the .md files server-side using the async server component
 - note - all files in the /app directory are 'use server' by default, i.e. they run server-side.
   - We only need to add 'use client' if we need client-side interactivity (e.g. hooks like useState, useEffect)
+
+## dynamic routing
+- For dynamic routing, React 11 accepted this structure in the app (was pages) folder `/blog/[slug].tsx`
+- React 15 no longer accepts this and now expects:
+`/blog/[slug]/page.tsx`
+
+## Using Marked
+- Change: import statement had to be changed to `import { marked } from 'marked';` instead of `import marked from 'marked';` as the marked package no longer has a default export.

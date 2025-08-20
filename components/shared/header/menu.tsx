@@ -14,9 +14,9 @@ const Menu = () => {
     <>
       <div className='flex justify-end gap-3'>
         <nav className='md:flex hidden w-full max-w-xs gap-1'>
-          <Button asChild variant='ghost'>
+          {/* <Button asChild variant='ghost'>
             <Link href='/blog'>Blog</Link>
-          </Button>
+          </Button> */}
           <ModeToggle />
         </nav>
         <nav className='md:hidden'>
@@ -27,9 +27,9 @@ const Menu = () => {
             <SheetContent className='flex flex-col items-start p-6'>
               <SheetTitle>Menu</SheetTitle>
               <ModeToggle />
-              <Button asChild variant='ghost'>
+              {/* <Button asChild variant='ghost'>
                 <Link href='/blog'>Blog</Link>
-              </Button>
+              </Button> */}
             </SheetContent>
           </Sheet>
         </nav>

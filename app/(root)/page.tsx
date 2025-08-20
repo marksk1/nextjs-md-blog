@@ -3,6 +3,7 @@ import Image from 'next/image';
 import path from 'path';
 import matter from 'gray-matter';
 import Post from '@/components/shared/post';
+import { sortByDate } from '@/lib/myutils';
 // note - all files in the /app directory are 'use server' by default, i.e. they run server-side.
 // We only need to add 'use client' if we need client-side interactivity (e.g. hooks like useState, useEffect)
 
@@ -30,7 +31,7 @@ async function getPosts() {
     };
   });
   return {
-    posts,
+    posts: posts.sort(sortByDate),
   };
 }
 
