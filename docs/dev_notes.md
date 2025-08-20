@@ -50,3 +50,35 @@
 
 ## Using Marked
 - Change: import statement had to be changed to `import { marked } from 'marked';` instead of `import marked from 'marked';` as the marked package no longer has a default export.
+
+## Deployment
+- export the built static website to an `out` folder by adding `&& next export` to the build script in `package.json`, like this:
+```
+"build": "next build && next export",
+```
+  - UPDATE: next export within the build script has been replaced by the following within the `next.config.ts` file:
+```
+- const nextConfig: NextConfig = {
+  /* config options here */
+  output: 'export' // export static site to `out` folder
+};
+```
+- then run `npm run build`
+
+- we then had some issues with eslint rules, for example using <img> instead of the optimised <Image> tag. This rule is `@typescript-eslint/no-unused-vars`
+  - We can disable eslint rules by adding them within the `eslint.config.mjs` file, like this:
+```
+const eslintConfig = [
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  {
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
+];
+```
+- once built successfully, an `out` folder will appear
+- now we can serve using a tool like `serve`
+  - first install it: `npm install -g serve` (globally)
+  - then we can use it to serve on a particular port: `serve -s ./out -p 8000`
+  - congrats, your site is served!

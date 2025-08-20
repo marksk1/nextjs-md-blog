@@ -13,7 +13,7 @@ export async function generateStaticParams() {
   const paths = files.map((filename) => ({
     slug: filename.replace('.md', ''),
   }));
-  console.log(paths);
+  // console.log(paths);
   return paths;
 }
 
